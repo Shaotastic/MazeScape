@@ -27,6 +27,9 @@ public class EnemyHealth : Health
     {
         Instantiate(Explosion, transform.position, Quaternion.identity);
         GetComponent<MeshRenderer>().enabled = false;
+        GameManager.enemiesKilled++;
+        //GetComponent<Ball>().enabled = false;
+        //GetComponent<StateManager>().enabled = false;
         //GetComponent<Enemy>().enabled = false;
         Destroy(this.gameObject, 2);
     }

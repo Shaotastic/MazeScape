@@ -17,7 +17,7 @@ public class KeyObject : MonoBehaviour {
     {
         if(col.tag == "Player")
         {
-            GameManager.keys--;
+            GameManager.AddKey();
             Destroy(this.gameObject);
         }
     }

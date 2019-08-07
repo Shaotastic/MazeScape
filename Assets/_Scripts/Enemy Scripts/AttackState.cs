@@ -18,9 +18,7 @@ public class AttackState : State
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         this.bullet = bullet;
-    }
-
-    
+    } 
 
     public override void Tick()
     {

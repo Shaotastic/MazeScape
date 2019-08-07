@@ -8,6 +8,10 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GetComponent<StateManager>())
+        {
+            gameObject.AddComponent<StateManager>();
+        }
         states = GetComponent<StateManager>();
 
         states.AddState(new WanderState(this.gameObject));

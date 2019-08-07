@@ -15,6 +15,10 @@ public class Drone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(!GetComponent<StateManager>())
+        {
+            gameObject.AddComponent<StateManager>();
+        }
         states = GetComponent<StateManager>();
         rigid = GetComponent<Rigidbody>();
         IntializeStates();

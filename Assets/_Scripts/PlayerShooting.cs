@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class PlayerShooting : MonoBehaviour
 {
-
     // PUBLIC VARIABLES FOR TESTING
     public Transform FlashPoint;
     public GameObject bullet;
@@ -11,6 +11,7 @@ public class PlayerShooting : MonoBehaviour
     public GameObject MuzzleFlash;
     public GameObject Explosion;
     public GameObject BulletImpact;
+    public GameObject ArmCanon;
 
     public GameObject cursor;
     public float cursorSize;
@@ -21,6 +22,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private Animator m_Animator;
     public float markerFireRate = 0.2f;
     public float bulletSpeed = 20;
+    public int vibrate;
+    public int elastic;
+    public bool snap;
 
     bool activate;
     bool shootButton;
@@ -33,6 +37,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         RifleShotSound.SetScheduledEndTime(0.1);
+
     }
 
     // Update is called once per frame (for Physics)
@@ -54,7 +59,8 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetButton("Fire1") && !firedBullet)
         {
             shootButton = true;
-        
+
+            ArmCanon.transform.DOPunchPosition(Vector3.back / 3, fireRate, vibrate, elastic, snap);
             StartCoroutine(Fire());
         }
 
@@ -64,8 +70,8 @@ public class PlayerShooting : MonoBehaviour
             StartCoroutine(FireMarker());
         }
 
-        m_Animator.SetBool("Shooting", shootButton);
-        m_Animator.SetFloat("RecoilSpeed", fireRate);
+        //m_Animator.SetBool("Shooting", shootButton);
+        //m_Animator.SetFloat("RecoilSpeed", fireRate);
     }
 
     void LateUpdate()
@@ -87,10 +93,12 @@ public class PlayerShooting : MonoBehaviour
         //    }
         //}
     }
+
     IEnumerator Fire()
     {
         FireBullet();
         firedBullet = true;
+
 
         Instantiate(this.MuzzleFlash, this.FlashPoint.position, Quaternion.identity);
 
@@ -115,7 +123,7 @@ public class PlayerShooting : MonoBehaviour
     {
         FireMarkerBullet();
         firedMarker = true;
-
+        
         yield return new WaitForSeconds(markerFireRate);
         firedMarker = false;
     }
@@ -124,6 +132,7 @@ public class PlayerShooting : MonoBehaviour
     {
         Ray ray = new Ray(Camera.main.transform.position - (-1 * Camera.main.transform.forward), Camera.main.transform.forward);
         RaycastHit raycast;
+
         if (Physics.Raycast(ray, out raycast, Mathf.Infinity))
         {
             if (raycast.collider.tag == "Enemy")
@@ -145,6 +154,7 @@ public class PlayerShooting : MonoBehaviour
     {
         Ray ray = new Ray(Camera.main.transform.position - (-1 * Camera.main.transform.forward), Camera.main.transform.forward);
         RaycastHit raycast;
+        
         if (Physics.Raycast(ray, out raycast, Mathf.Infinity))
         {
             if (raycast.collider.tag == "Enemy")

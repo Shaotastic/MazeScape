@@ -15,7 +15,7 @@ public class KillBox : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.LogError("WTFFF");
+        //Debug.LogError("WTFFF");
 
         if (col.tag == "Player")
             col.GetComponent<PlayerHealth>().DealDamage(9999);

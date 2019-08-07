@@ -54,15 +54,21 @@ public class GridGenerator : MonoBehaviour
         gridY = y;
 
 
-        if(obj != null)
-        {
-            GenerateGridArray(obj);
-        }
+        //if(obj != null)
+        //{
+        //    GenerateGridArray(obj);
+        //}
 
         if (objArray != null)
         {
             GenerateGridArray(objArray); //Generates a grid using the 2d array
         }
+
+        PathGenerator.GeneratePaths();
+
+        //Generate Maze
+        //Generate paths
+        //Check if 
 
     }
 
@@ -148,14 +154,14 @@ public class GridGenerator : MonoBehaviour
                 GameObject temp = tempObj[Random.Range(0, tempObj.Length)];
                 //temp.name = "Platform " + i + "x" + j;
 
-                if (Random.value <= checkpointPercentage && numberOfCheckpoints > 0)
-                {
-                    temp = checkpointTile;
-                    temp.name = "Checkpoint";
-                    checkpointPercentage = 0f;
-                    numberOfCheckpoints--;
-                }
-                else if(Random.value <= exitPercentage || i == x - 1 && j == y - 1)
+                //if (Random.value <= checkpointPercentage && numberOfCheckpoints > 0)
+                //{
+                //    temp = checkpointTile;
+                //    temp.name = "Checkpoint";
+                //    checkpointPercentage = 0f;
+                //    numberOfCheckpoints--;
+                //}
+                if(Random.value <= exitPercentage || i == x - 1 && j == y - 1)
                 {
                     if (!exitTilePlaced)
                     {

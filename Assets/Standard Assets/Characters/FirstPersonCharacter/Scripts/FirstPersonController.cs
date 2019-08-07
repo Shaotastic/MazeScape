@@ -83,7 +83,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
-            m_Animator.SetFloat("Speed", m_CharacterController.velocity.magnitude);
+            //m_Animator.SetFloat("Speed", m_CharacterController.velocity.magnitude);
         }
 
 

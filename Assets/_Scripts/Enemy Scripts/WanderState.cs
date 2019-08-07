@@ -76,7 +76,7 @@ public class WanderState : State
 
                     //if (direction.y % 90 != 0)
                     //Debug.DrawRay(transform.position, direction * distance, Color.blue);
-                    Debug.Log(hit.transform.name);
+                    //Debug.Log(hit.transform.name);
                     influenceDirection = Vector3.Reflect(-direction, transform.forward);// new Vector3(0, -direction.y, 0);
                     return true;
                 }

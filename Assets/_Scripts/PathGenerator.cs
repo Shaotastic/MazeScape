@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
-
     public static Node[] nodes;
 
     // Use this for initialization
     void Start()
     {
-        if(nodes != null)
+        //GeneratePaths();
+    }
+
+    public static Node FindNode(Vector3 position)
+    {
+        Node node = null;
+
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            if (Vector3.Distance(position, nodes[i].transform.position) <= 5)
+            {
+                node = nodes[i];
+                return node;
+            }
+        }
+
+        return node;
+    }
+
+    public static void GeneratePaths()
+    {
+        if (nodes != null)
         {
             nodes = null;
         }
@@ -28,7 +48,7 @@ public class PathGenerator : MonoBehaviour
                     if (Physics.Raycast(nodes[i].transform.position, direction, out ray, Mathf.Infinity))
                     {
                         float distance = Vector3.Distance(nodes[i].transform.position, nodes[j].transform.position);
-                        if (ray.transform.tag == "Node" &&  distance <= 8f)
+                        if (ray.transform.tag == "Node" && distance <= 8f)
                             nodes[i].AddNeighborNode(nodes[j], distance);
                     }
                 }
@@ -38,20 +58,9 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
-    public static Node FindNode(Vector3 position)
+    public static void AStarPath(Transform currentPosition, Node node, float h)
     {
-        Node node = null;
 
-        for (int i = 0; i < nodes.Length; i++)
-        {
-            if (Vector3.Distance(position, nodes[i].transform.position) <= 5)
-            {
-                node = nodes[i];
-                return node;
-            }
-        }
-
-        return node;
     }
 
 }

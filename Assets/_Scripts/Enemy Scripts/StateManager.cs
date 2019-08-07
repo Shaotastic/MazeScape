@@ -12,6 +12,12 @@ public class StateManager : MonoBehaviour
 
     [SerializeField] State currentState;
 
+    public StateManager()
+    {
+        pairs = new Dictionary<Type, State>();
+    }
+
+
     // Update is called once per frame
     public void AddState(State state)
     {
@@ -33,6 +39,7 @@ public class StateManager : MonoBehaviour
 
     public void TransitionState(Type state)
     {
-        currentState = pairs[state];
+        if(pairs.ContainsKey(state))
+            currentState = pairs[state];
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
 
-    public static int keys = 1;
+    public static int keys = 2;
 
     public static bool exitEnable = false;
 
@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public static float time;
 
     public static int playerDeaths = 0;
+
+    static int currentKeys = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -22,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (keys == 0)
+        if (currentKeys == keys)
             exitEnable = true;
 
         time += Time.time;
@@ -33,5 +36,16 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(Time.time / 60);
         int seconds = Mathf.FloorToInt(Time.time % 60);
         return minutes + ":" + seconds;
+    }   
+    
+    public static void AddKey()
+    {
+        if (currentKeys != keys)
+            currentKeys++;
+    }
+
+    public static int GetKeyAmount()
+    {
+        return currentKeys;
     }
 }

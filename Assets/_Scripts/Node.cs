@@ -8,7 +8,6 @@ public class Node : MonoBehaviour {
     public List<float> nodeScores;
 
     #endregion
-
     void Update()
     {
         if(NeighborNodes.Count != 0)

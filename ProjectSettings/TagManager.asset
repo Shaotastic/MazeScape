@@ -8,6 +8,7 @@ TagManager:
   - Checkpoint
   - Node
   - Bullet
+  - Gun
   layers:
   - Default
   - TransparentFX
